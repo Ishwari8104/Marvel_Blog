@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1 class="page-title">Posts</h1><hr>
+
+{% for post in object_list %}
+<div class="alert alert-warning post-alert" role="alert">
+    <h4 class="alert-heading"><a href="{% url 'article_details' post.pk %}" class="post-item-link">{{post.title}}</a></h4>
+    <h5><a href="{% url 'category' post.category %}">{{post.category}}</a> | {{post.author}} | {{post.post_date}}</h5>
+    <p>{{post.body|slice:":100"}}</p>
+    <p class="mb-0">
+        {% if user.is_authenticated %}
+        <a href="{% url 'update_post' post.pk %}" class="btn btn-secondary btn-sm">Edit</a>
+        <a href="{% url 'delete_post' post.pk %}" class="btn btn-danger btn-sm">Delete</a>
+        {% endif %}
+    </p>
+</div>
+{% endfor %}
+
+<style>
+    .post-item-link {
+        color: #E30022; /* Set the desired text color for the post title links */
+    }
+    
+    .post-item-link:hover,
+    .post-item-link:visited,
+    .post-item-link:focus {
+        color: #E30022; /* Set the same text color for all link states */
+    }
+</style>
+
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{%if user.is_authenticated %}
+<h1 class="page-title">Add Category<h1>
+    <div class="form-group" style="font-size: 24px;">
+        <form method="POST">
+        {% csrf_token %}
+        {{form.as_p}}
+        <button class="btn btn-secondary">Add Category</button>
+    </div>
+{% endif %}
+
+{% endblock %}

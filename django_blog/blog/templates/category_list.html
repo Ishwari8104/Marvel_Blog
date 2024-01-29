@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+<h1>Blog Categories</h1>
+{% for item in cat_menu_list %}
+<ul class="list-group">
+    <a href="{% url 'category' item %}"><li class="list-group-item">{{item}}</li></a>
+    
+</ul>
+
+{% endfor %}
+{% endblock %}
