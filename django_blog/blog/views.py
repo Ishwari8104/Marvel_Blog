@@ -56,20 +56,13 @@ def CategoryView(request,cats):
     return render(request,'categories.html',{'cats':cats.title(),'category_posts':category_posts})
     
     
-api_key = "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"
-client = OpenAI(api_key=api_key)
 
-def ask_openai(chat):
-    completion = client.chat.completions.create(
-        model="gpt-3.5-turbo",
-        messages=[{"role": "user", "content": chat}]
-    )
-    answer = completion.choices[0].message.content
-    return answer
+
+
 
 def ChatbotView(request):
     if request.method == 'POST':
         chat = request.POST.get('message')
-        response = ask_openai(chat)
+        response = query_comics(chat)  # Use the utility function
         return JsonResponse({'message': chat, 'response': response})
     return render(request, 'chatbot.html')
