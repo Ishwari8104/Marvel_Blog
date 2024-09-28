@@ -5,8 +5,10 @@ from django.views.generic import ListView,DetailView,CreateView,UpdateView,Delet
 from .forms import PostForm,EditForm
 from django.urls import reverse_lazy
 from django.http import JsonResponse
-from openai import OpenAI
-
+from openai import OpenAI   
+from django.http import JsonResponse
+from django.shortcuts import render
+import requests
 
 
 # Create your views here.
@@ -60,9 +62,19 @@ def CategoryView(request,cats):
 
 
 
+
+
 def ChatbotView(request):
     if request.method == 'POST':
-        chat = request.POST.get('message')
-        response = query_comics(chat)  # Use the utility function
-        return JsonResponse({'message': chat, 'response': response})
+        message = request.POST.get('message')
+        
+        try:
+            response = requests.post('http://127.0.0.1:5000/api/chatbot', data={'message': message})
+            data = response.json()
+        except requests.exceptions.RequestException as e:
+            data = {'response': f'Error communicating with the chatbot: {str(e)}'}
+        
+        return JsonResponse(data)
+    
     return render(request, 'chatbot.html')
+
