@@ -2,6 +2,7 @@
 
 {% block content %}
 {% if user.is_authenticated %}
+{% if user.id == post.author.id %}
 <h1 class="page-title">Update Post<h1>
     <div class="form-group" style="font-size: 24px;">
         <form method="POST">
@@ -9,6 +10,11 @@
         {{form.as_p}}
         <button class="btn btn-secondary">Update</button>
     </div>
+{% else %}
+Earth is closed today!
+{% endif %}
+{% else %}
+Earth is closed today!
 {% endif %}
 
 {% endblock %}

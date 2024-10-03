@@ -4,11 +4,13 @@
 
 
 <h1>{{post.title}}</h1>
-<small>By:{{post.author.first_name}} {{post.author.last_name}}||{{post.post_date}}||
+<small>By:{{post.author}} ||{{post.post_date}}||
     </small></br>
     <small>
         {% if user.is_authenticated %}
+        {% if user.id == post.author.id %}
         <a href="{% url 'update_post' post.pk %}">(Edit)</a>&nbsp;|&nbsp;<a href="{% url 'delete_post' post.pk %}">(Delete)</a></small>
+        {% endif %}
         {% endif %}
     <hr>
     {{post.body|safe}}</br><hr>

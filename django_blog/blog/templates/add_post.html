@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-{%if user.is_authenticated %}
+{% if user.is_authenticated %}
 <h1 class="page-title">Add Blog Posts<h1>
     <div class="form-group" style="font-size: 24px;">
         <form method="POST">
@@ -9,6 +9,13 @@
         {{form.as_p}}
         <button class="btn btn-secondary">Post</button>
     </div>
+    <script>
+        var name = "{{user.id}}";
+        document.getElementById("identity").value = name;
+    </script>
+    
+{% else %}
+Sir, I'm gonna have to ask you to exit the donut(page).
 {% endif %}
 
 {% endblock %}

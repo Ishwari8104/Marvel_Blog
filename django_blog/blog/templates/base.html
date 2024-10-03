@@ -114,9 +114,9 @@
                 <a class="nav-link" href="{% url 'add_post' %}">Add a post</a>
               </li>
               
-              <li class="nav-item">
+              {% comment %} <li class="nav-item">
                 <a class="nav-link" href="{% url 'add_category' %}">Add Category</a>
-              </li>
+              </li> {% endcomment %}
               {% else %}
               <li class="nav-item">
                 <a class="nav-link" href="{% url 'login' %}">Login</a>
@@ -126,14 +126,18 @@
               </li>
               
               {% endif %}
-              {% if cat_menu %}
+              {% comment %} {% if cat_menu %}
               <li class="nav-item">
                 <a class="nav-link" href="{% url 'category_list' %}">Categories</a>
               </li>
-              {% endif %}
+              {% endif %} {% endcomment %}
               <li class="nav-item">
-                <a class="nav-link" href="{% url 'logout' %}">Logout</a>
-              </li>
+                <form id="logout-form" action="{% url 'logout' %}" method="POST" style="display: none;">
+                    {% csrf_token %}
+                </form>
+                <a class="nav-link" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+            </li>
+            
               <li class="nav-item">
                 <a class="nav-link" href="{% url 'chatbot' %}">MarBot</a>
               </li>

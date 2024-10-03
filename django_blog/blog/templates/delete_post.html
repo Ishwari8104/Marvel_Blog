@@ -1,19 +1,23 @@
 {% extends 'base.html' %}
 
 {% block content %}
-{%if user.is_authenticated %}
-<h1 class="page-title">Delete Post<h1></br></br>
-    
-    
-    <div class="alert alert-warning post-alert"  role="alert">
-        <h4 class="alert-heading">Delete:{{post.title}}?</h4>
-        <div class="form-group" style="font-size: 24px;">
-            <form method="POST">
-            {% csrf_token %}
-        <p>Are you sure you want to delete this post?</p>
-        <hr>
-        <button class="btn btn-secondary">Delete</button><hr>
-      </div>
+{% if user.is_authenticated %}
+{% if user.id == post.author.id %}
+    <h1 class="page-title">Delete Post<h1></br></br>
+        
+        
+        <div class="alert alert-warning post-alert"  role="alert">
+            <h4 class="alert-heading">Delete:{{post.title}}?</h4>
+            <div class="form-group" style="font-size: 24px;">
+                <form method="POST">
+                {% csrf_token %}
+            <p>Are you sure you want to delete this post?</p>
+            <hr>
+            <button class="btn btn-secondary">Delete</button><hr>
+        </div>
+        {% else %}
+        Sir, I'm gonna have to ask you to exit the donut(page).
+{% endif %}
 {% endif %}
 
 {% endblock %}

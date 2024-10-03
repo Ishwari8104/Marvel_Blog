@@ -12,7 +12,7 @@ class PostForm(forms.ModelForm):
         model=Post
         fields=('title','author','body','category')
         widgets={"title":forms.TextInput(attrs={'class':'form-control','placeholder':"Enter the title of your blog here!"}),
-                "author":forms.Select(attrs={'class':'form-control'}),
+                "author":forms.TextInput(attrs={'class':'form-control','value':'','id':'identity','type':'hidden'}),
                 "category":forms.Select(choices=choice_list,attrs={'class':'form-control'}),
                 "body":forms.Textarea(attrs={'class':'form-control','placeholder':"Write your blog here!"}),
                 

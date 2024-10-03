@@ -7,6 +7,7 @@
 {% endblock %}
 
 {% block content %}
+{% if user.is_authenticated %}
 <div class="chat-container">
     <div class="card flex-grow-1">
         <div class="card-header bg-primary text-white">Chat</div>
@@ -15,7 +16,7 @@
                 <li class="message received">
                     <div class="message-text">
                         <div class="message-sender">
-                            <b>AI Chatbot</b>
+                            <b>MarBot</b>
                         </div>
                         <div class="message-content">
                             Hi, I am your AI Chatbot, you can ask me anything.
@@ -36,6 +37,9 @@
         </div>
     </form>
 </div>
+{% else %}
+On your left.
+{% endif %}
 
 <script>
     const messageList = document.getElementById('messages-list');
@@ -88,4 +92,6 @@
         messageList.scrollTop = messageList.scrollHeight;
     };
 </script>
+
+
 {% endblock %}
